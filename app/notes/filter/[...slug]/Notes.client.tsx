@@ -12,6 +12,7 @@ export default function NotesClient({ category }: NotesClientProps) {
   const { data } = useQuery({
     queryKey: ['notes', '', 1, category],
     queryFn: () => fetchNotes('', 1, category),
+    refetchOnMount: false,
   });
 
   const notes = data?.notes ?? [];
