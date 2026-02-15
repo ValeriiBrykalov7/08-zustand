@@ -1,4 +1,5 @@
 'use client';
+
 import css from './NotePreview.module.css';
 import { BackButton } from '@/components/BackButton/BackButton';
 import Modal from '@/components/Modal/Modal';
