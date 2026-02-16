@@ -16,8 +16,8 @@ const NotesByCategory = async ({ params }: NotesByCategoryProps) => {
 
   const queryClient = new QueryClient();
   await queryClient.prefetchQuery({
-    queryKey: ['notes', '', 1, category],
-    queryFn: () => fetchNotes('', 1, category),
+    queryKey: ['notes', category],
+    queryFn: () => fetchNotes(category),
   });
 
   return (

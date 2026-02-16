@@ -11,6 +11,7 @@ import NoteList from '@/components/NoteList/NoteList';
 import SearchBox from '@/components/SearchBox/SearchBox';
 import { fetchNotes } from '@/lib/api';
 import Pagination from '@/components/Pagination/Pagination';
+import { useRouter } from 'next/navigation';
 
 type NotesClientProps = {
   category: string;
@@ -27,7 +28,7 @@ const NotesClient = ({ category }: NotesClientProps) => {
 
   const { data } = useQuery({
     queryKey: ['notes', debouncedQuery, currentPage, category],
-    queryFn: () => fetchNotes(debouncedQuery, currentPage, category),
+    queryFn: () => fetchNotes(category, debouncedQuery, currentPage),
     placeholderData: keepPreviousData,
     refetchOnMount: false,
   });
@@ -61,7 +62,7 @@ const NotesClient = ({ category }: NotesClientProps) => {
         {notes.length > 0 && <NoteList notes={notes} />}
 
         {isModalOpen && (
-          <Modal>
+          <Modal onClose={closeModal}>
             <NoteForm onClose={closeModal} />
           </Modal>
         )}

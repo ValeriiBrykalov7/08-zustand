@@ -5,9 +5,10 @@ import { BackButton } from '@/components/BackButton/BackButton';
 import Modal from '@/components/Modal/Modal';
 import { fetchNoteById } from '@/lib/api';
 import { useQuery } from '@tanstack/react-query';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 
 export default function NotePreviewClient() {
+  const router = useRouter();
   const { id } = useParams<{ id: string }>();
   const { data, isLoading, error } = useQuery({
     queryKey: ['note', id],
@@ -19,7 +20,7 @@ export default function NotePreviewClient() {
   if (error || !data) return <p>Something went wrong.</p>;
 
   return (
-    <Modal>
+    <Modal onClose={() => router.back()}>
       <div className={css.container}>
         <div className={css.item}>
           <div className={css.header}>
@@ -28,8 +29,10 @@ export default function NotePreviewClient() {
           <p className={css.tag}>{data.tag}</p>
           <p className={css.content}>{data.content}</p>
           <p className={css.date}>{data.createdAt}</p>
+          <button className={css.backBtn} onClick={() => router.back()}>
+            Back
+          </button>
         </div>
-        <BackButton />
       </div>
     </Modal>
   );
