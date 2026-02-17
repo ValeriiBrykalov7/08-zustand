@@ -1,7 +1,6 @@
 'use client';
 
 import css from './NotePreview.module.css';
-import { BackButton } from '@/components/BackButton/BackButton';
 import Modal from '@/components/Modal/Modal';
 import { fetchNoteById } from '@/lib/api';
 import { useQuery } from '@tanstack/react-query';

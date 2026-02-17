@@ -11,7 +11,6 @@ import NoteList from '@/components/NoteList/NoteList';
 import SearchBox from '@/components/SearchBox/SearchBox';
 import { fetchNotes } from '@/lib/api';
 import Pagination from '@/components/Pagination/Pagination';
-import { useRouter } from 'next/navigation';
 
 type NotesClientProps = {
   category: string;

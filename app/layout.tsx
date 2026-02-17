@@ -1,4 +1,12 @@
 import type { Metadata } from 'next';
+import { Roboto } from 'next/font/google';
+
+const roboto = Roboto({
+  subsets: ['latin'],
+  weight: ['400', '700'],
+  variable: '--font-roboto',
+  display: 'swap',
+});
 import './globals.css';
 import Header from '@/components/Header/Header';
 import Footer from '@/components/Footer/Footer';
@@ -17,7 +25,7 @@ export default function RootLayout({
   modal: React.ReactNode;
 }>) {
   return (
-    <html lang='en'>
+    <html className={roboto.variable} lang='en'>
       <body suppressHydrationWarning>
         <TanStackProvider>
           <Header />

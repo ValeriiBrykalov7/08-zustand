@@ -5,10 +5,23 @@ import {
   QueryClient,
 } from '@tanstack/react-query';
 import NotesClient from './Notes.client';
+import { Metadata } from 'next';
 
 type NotesByCategoryProps = {
   params: Promise<{ slug: string[] }>;
 };
+
+export async function generateMetadata({
+  params,
+}: NotesByCategoryProps): Promise<Metadata> {
+  const { slug } = await params;
+  const category = slug?.[0];
+
+  return {
+    title: `${category} Notes`,
+    description: 'Read your note',
+  };
+}
 
 const NotesByCategory = async ({ params }: NotesByCategoryProps) => {
   const { slug } = await params;
