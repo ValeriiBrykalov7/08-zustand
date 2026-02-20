@@ -19,7 +19,20 @@ export async function generateMetadata({
 
   return {
     title: `${category} Notes`,
-    description: 'Read your note',
+    description: `Read your ${category} notes`,
+    openGraph: {
+      title: `${category} Notes`,
+      description: `Read your ${category} notes`,
+      url: `https://08-zustand-tau-flax.vercel.app/notes/filter/${category}`,
+      images: [
+        {
+          url: 'https://ac.goit.global/fullstack/react/notehub-og-meta.jpg',
+          width: 1200,
+          height: 630,
+          alt: 'NoteHub app',
+        },
+      ],
+    },
   };
 }
 
