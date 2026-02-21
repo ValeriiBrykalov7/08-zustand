@@ -48,7 +48,7 @@ export default function NoteForm() {
         <label htmlFor={`${fieldId}-title`}>Title</label>
         <input
           id={`${fieldId}-title`}
-          defaultValue={draft?.title}
+          value={draft?.title || ''}
           type='text'
           name='title'
           className={css.input}
@@ -60,7 +60,7 @@ export default function NoteForm() {
         <label htmlFor={`${fieldId}-content`}>Content</label>
         <textarea
           id={`${fieldId}-content`}
-          defaultValue={draft?.content}
+          value={draft?.content || ''}
           onChange={handleChange}
           name='content'
           rows={8}
@@ -71,7 +71,7 @@ export default function NoteForm() {
       <div className={css.formGroup}>
         <label htmlFor={`${fieldId}-tag`}>Tag</label>
         <select
-          defaultValue={draft?.tag}
+          value={draft?.tag || 'Todo'}
           onChange={handleChange}
           id={`${fieldId}-tag`}
           name='tag'
