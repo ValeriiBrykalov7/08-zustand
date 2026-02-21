@@ -5,31 +5,25 @@ import { useState } from 'react';
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import { useDebounce } from 'use-debounce';
 
-import Modal from '@/components/Modal/Modal';
-import NoteForm from '@/components/NoteForm/NoteForm';
 import NoteList from '@/components/NoteList/NoteList';
 import SearchBox from '@/components/SearchBox/SearchBox';
 import { fetchNotes } from '@/lib/api';
 import Pagination from '@/components/Pagination/Pagination';
+import Link from 'next/link';
 
 type NotesClientProps = {
   category: string;
 };
 
 const NotesClient = ({ category }: NotesClientProps) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [query, setQuery] = useState('');
   const [debouncedQuery] = useDebounce(query, 500);
   const [currentPage, setCurrentPage] = useState(1);
-
-  const closeModal = () => setIsModalOpen(false);
-  const openModal = () => setIsModalOpen(true);
 
   const { data } = useQuery({
     queryKey: ['notes', debouncedQuery, currentPage, category],
     queryFn: () => fetchNotes(category, debouncedQuery, currentPage),
     placeholderData: keepPreviousData,
-    refetchOnMount: false,
   });
 
   const notes = data?.notes ?? [];
@@ -54,17 +48,11 @@ const NotesClient = ({ category }: NotesClientProps) => {
             />
           )}
 
-          <button onClick={openModal} className={css.button}>
+          <Link href={'/notes/action/create'} className={css.button}>
             Create note +
-          </button>
+          </Link>
         </header>
         {notes.length > 0 && <NoteList notes={notes} />}
-
-        {isModalOpen && (
-          <Modal onClose={closeModal}>
-            <NoteForm onClose={closeModal} />
-          </Modal>
-        )}
       </div>
     </main>
   );
